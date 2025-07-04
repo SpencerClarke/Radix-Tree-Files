@@ -53,17 +53,7 @@ int main(void)
 					struct Radix_Tree_Value *lookup_value = radix_tree_file_writer_value_lookup(&writer, (uint8_t *)current_token);
 					if(lookup_value == NULL)
 					{
-						if(strcmp(current_token, "おはよう") == 0)
-						{
-							printf("BOOM!\n");
-							printf("%p\n", (void *)value);
-							radix_tree_insert(&(writer.radix_tree_root), "おはよう", value);
-							printf("%p\n", (void *)radix_tree_lookup((writer.radix_tree_root), "おはよう"));
-						}
-						else
-						{
-							radix_tree_insert(&(writer.radix_tree_root), current_token, value);
-						}
+						radix_tree_insert(&(writer.radix_tree_root), current_token, value);
 					}
 					else
 					{
