@@ -32,7 +32,7 @@ struct Radix_Tree_Value *radix_tree_file_writer_value_lookup(struct Radix_Tree_F
 struct Radix_Tree_Value *radix_tree_file_writer_value_init(struct Radix_Tree_File_Writer *writer, uint32_t value_size, uint8_t *value)
 {
 	struct Radix_Tree_Value *out;
-
+	
 	out = malloc(sizeof(struct Radix_Tree_Value));
 	if(out == NULL)
 	{
@@ -76,7 +76,8 @@ void radix_tree_file_writer_modify_value(struct Radix_Tree_File_Writer *writer, 
 		fprintf(stderr, "radix_tree_file_writer_modify_value: failed to realloc\n");
 		exit(4);
 	}
-	memcpy(value->value, new_value, new_value_size);	
+	memcpy(value->value, new_value, new_value_size);
+	value->value_size = new_value_size;	
 }
 
 static size_t compute_radix_tree_file_size(struct Radix_Tree_Node *root)
