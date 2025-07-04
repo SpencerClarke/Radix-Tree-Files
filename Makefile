@@ -3,8 +3,15 @@
 CC := gcc
 CFLAGS := -I./include -Wall -Wextra -Wpedantic -g
 
+BUILD_DIR := build
+BIN_DIR := bin
 
-all: bin/encode bin/search
+all: $(BUILD_DIR) $(BIN_DIR) bin/encode bin/search
+
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
 bin/encode: src/encode.c build/radix_tree.o build/radix_tree_file_writer.o
 	$(CC) $(CFLAGS) -o bin/encode src/encode.c build/radix_tree.o build/radix_tree_file_writer.o
