@@ -17,6 +17,7 @@ A radix tree node is of the following format
 `left offset` and `right offset` are file offsets to the node's left and right children respectively, offset from `SEEK_SET`.
 `value offset` is the file offset from `SEEK_SET` to the beginning of the data node, or all 0's if there is no value in that node.
 `key bit count` is the number of bits packed into the radix tree node, which are stored in the bytes that follow it, with the lowest order bits coming first.
+The root node is always the first node in the file.
 
 A data node is of the following format
 ```
