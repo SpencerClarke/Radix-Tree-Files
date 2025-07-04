@@ -23,6 +23,10 @@ int main(int argc, char **argv)
 	for(size_t i = 0; i < data_size-2; i++)
 	{
 		putchar(lookup[i]);
+		if(lookup[i] == ',')
+		{
+			putchar(' ');
+		}
 	}
 	putchar('\n');
 
