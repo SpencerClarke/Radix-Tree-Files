@@ -6,12 +6,15 @@ CFLAGS := -I./include -Wall -Wextra -Wpedantic -g
 BUILD_DIR := build
 BIN_DIR := bin
 
-all: $(BUILD_DIR) $(BIN_DIR) bin/encode bin/search
+all: $(BUILD_DIR) $(BIN_DIR) bin/encode bin/search bin/tokenize
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
+
+bin/tokenize: src/tokenize.c build/radix_tree_file_reader.o
+	$(CC) $(CFLAGS) -o bin/tokenize src/tokenize.c build/radix_tree_file_reader.o
 
 bin/encode: src/encode.c build/radix_tree.o build/radix_tree_file_writer.o
 	$(CC) $(CFLAGS) -o bin/encode src/encode.c build/radix_tree.o build/radix_tree_file_writer.o
@@ -29,5 +32,5 @@ build/radix_tree.o: include/radix_tree.h src/radix_tree.c
 	$(CC) $(CFLAGS) -c src/radix_tree.c -o build/radix_tree.o
 
 clean:
-	rm -f build/*
-	rm -f bin/*
+	rm -rf build
+	rm -rf bin

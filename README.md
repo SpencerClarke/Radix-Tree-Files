@@ -41,6 +41,31 @@ National Aeronautics and Space Administration   NASA    べいこうくううち
 svampis@thinkcentre:~/Radix-Tree-Files$
 ```
 
+I also tried implementing a program that, given a japanese sentence, will break it into words by matching longest suffixes. It only works when the lexeme is contained in JMDict, so it won't work great for sentences with conjugated verbs in them
+
+```
+svampis@thinkcentre:~/Radix-Tree-Files$ ./bin/tokenize jmdict.rdt 学校に行くのは最悪だね
+学校
+に
+行く
+の
+は
+最悪
+だ
+ね
+svampis@thinkcentre:~/Radix-Tree-Files$ ./bin/tokenize jmdict.rdt 俺の好きな食べ物はハンバーガーだ
+俺
+の
+好き
+な
+食べ物
+は
+ハンバーガー
+だ
+svampis@thinkcentre:~/Radix-Tree-Files$
+```
+
+
 So, Why would someone want this?
 Well, it provides O(k) lookup times without loading a trie or a hashmap into main memory where k is key length.
 You can perform somewhat fast lookups, you use very little RAM used while searching, and 0 RAM used while not searching.
