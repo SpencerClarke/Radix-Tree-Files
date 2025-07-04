@@ -40,3 +40,7 @@ svampis@thinkcentre:~/Radix-Tree-Files$ ./bin/search jmdict.rdt 米航空宇宙�
 National Aeronautics and Space Administration   NASA    べいこうくううちゅうきょく
 svampis@thinkcentre:~/Radix-Tree-Files$
 ```
+
+So, Why would someone want this?
+Well, it provides O(k) lookup times without loading a trie or a hashmap into main memory where k is key length.
+You can perform somewhat fast lookups, you use very little RAM used while searching, and 0 RAM used while not searching.
