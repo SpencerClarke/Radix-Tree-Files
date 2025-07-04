@@ -185,6 +185,8 @@ void radix_tree_file_writer_destroy(struct Radix_Tree_File_Writer *writer)
 	}
 
 	radix_tree_destroy(writer->radix_tree_root, NULL);
+
+	fclose(writer->fp);
 }
 
 #endif
