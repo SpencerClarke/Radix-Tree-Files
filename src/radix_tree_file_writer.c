@@ -25,9 +25,9 @@ struct Radix_Tree_File_Writer radix_tree_file_writer_init(char *filename)
 	return out;
 }
 
-struct Radix_Tree_Value *radix_tree_file_writer_value_lookup(struct Radix_Tree_File_Writer *writer, uint8_t *key)
+struct Radix_Tree_Value *radix_tree_file_writer_value_lookup(struct Radix_Tree_File_Writer *writer, uint8_t *key, size_t key_size)
 {
-	return radix_tree_lookup(writer->radix_tree_root, (char *)key);
+	return radix_tree_lookup(writer->radix_tree_root, (char *)key, key_size);
 }
 struct Radix_Tree_Value *radix_tree_file_writer_value_init(struct Radix_Tree_File_Writer *writer, uint32_t value_size, uint8_t *value)
 {
@@ -57,14 +57,14 @@ struct Radix_Tree_Value *radix_tree_file_writer_value_init(struct Radix_Tree_Fil
 
 	return out;
 }
-void radix_tree_file_writer_insert(struct Radix_Tree_File_Writer *writer, uint8_t *key, struct Radix_Tree_Value *value)
+void radix_tree_file_writer_insert(struct Radix_Tree_File_Writer *writer, uint8_t *key, size_t key_size, struct Radix_Tree_Value *value)
 {
-	radix_tree_insert(&(writer->radix_tree_root), (char *)key, value);
+	radix_tree_insert(&(writer->radix_tree_root), (char *)key, key_size, value);
 }
-void radix_tree_file_writer_modify_value(struct Radix_Tree_File_Writer *writer, uint8_t *key, uint32_t new_value_size, uint8_t *new_value)
+void radix_tree_file_writer_modify_value(struct Radix_Tree_File_Writer *writer, uint8_t *key, size_t key_size, uint32_t new_value_size, uint8_t *new_value)
 {
 	struct Radix_Tree_Value *value;
-	if((value = radix_tree_lookup(writer->radix_tree_root, (char *)key)) == NULL)
+	if((value = radix_tree_lookup(writer->radix_tree_root, (char *)key, key_size)) == NULL)
 	{
 		fprintf(stderr, "radix_tree_filer_writer_modify_value: tried to modify value on non-existent key\n");
 		exit(4);

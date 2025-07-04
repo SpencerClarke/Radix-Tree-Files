@@ -11,7 +11,7 @@
 #define UNSET_BIT(bytes,i) ((bytes)[(i) / CHAR_BIT] &= ~((1 << (CHAR_BIT-1)) >> ((i) % CHAR_BIT)))
 #define WRITE_BIT(bytes, i, bit) ((bit) ? SET_BIT((bytes), (i)) : UNSET_BIT((bytes), (i)))
 
-struct Radix_Tree_Node *radix_tree_node_init(char *data, char *key, size_t bit_start, size_t bit_length)
+static struct Radix_Tree_Node *radix_tree_node_init(char *data, char *key, size_t bit_start, size_t bit_length)
 {
 	struct Radix_Tree_Node *out;
 	size_t current_bit;
@@ -50,11 +50,11 @@ struct Radix_Tree_Node *radix_tree_node_init(char *data, char *key, size_t bit_s
 	return out;
 }
 
-void radix_tree_insert(struct Radix_Tree_Node **root, char *key, void *data)
+void radix_tree_insert(struct Radix_Tree_Node **root, char *key, size_t key_size, void *data)
 {
 	size_t current_key_bit;
 	size_t current_node_bit;
-	size_t key_bit_count = strlen(key) * CHAR_BIT;
+	size_t key_bit_count = key_size * CHAR_BIT;
 
 	struct Radix_Tree_Node **current_node;
 
@@ -209,12 +209,12 @@ void radix_tree_insert(struct Radix_Tree_Node **root, char *key, void *data)
 		exit(4);
 	}
 }
-void *radix_tree_lookup(struct Radix_Tree_Node *root, char *key)
+void *radix_tree_lookup(struct Radix_Tree_Node *root, char *key, size_t key_size)
 {
 	size_t current_key_bit;
 	size_t current_node_bit;
 
-	size_t key_bit_count = strlen(key) * CHAR_BIT;
+	size_t key_bit_count = key_size * CHAR_BIT;
 	struct Radix_Tree_Node *current_node = root;
 
 	for(current_key_bit = current_node_bit = 0; current_key_bit < key_bit_count; current_key_bit++)

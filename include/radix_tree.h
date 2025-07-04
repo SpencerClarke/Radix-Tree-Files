@@ -15,10 +15,8 @@ struct Radix_Tree_Node
 	struct Radix_Tree_Node *right;
 };
 
-struct Radix_Tree_Node *radix_tree_node_init(char *data, char *key, size_t bit_start, size_t bit_length);
-
-void radix_tree_insert(struct Radix_Tree_Node **root, char *key, void *data);
-void *radix_tree_lookup(struct Radix_Tree_Node *root, char *key);
+void radix_tree_insert(struct Radix_Tree_Node **root, char *key, size_t key_size, void *data);
+void *radix_tree_lookup(struct Radix_Tree_Node *root, char *key, size_t key_size);
 void radix_tree_destroy(struct Radix_Tree_Node *root, void (*destructor)(void *));
 
 #endif

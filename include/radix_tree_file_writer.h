@@ -32,9 +32,9 @@ struct Radix_Tree_File_Writer
 
 struct Radix_Tree_File_Writer radix_tree_file_writer_init(char *filename);
 struct Radix_Tree_Value *radix_tree_file_writer_value_init(struct Radix_Tree_File_Writer *writer, uint32_t value_size, uint8_t *value);
-void radix_tree_file_writer_insert(struct Radix_Tree_File_Writer *writer, uint8_t *key, struct Radix_Tree_Value *value);
-struct Radix_Tree_Value *radix_tree_file_writer_value_lookup(struct Radix_Tree_File_Writer *writer, uint8_t *key);
-void radix_tree_file_writer_modify_value(struct Radix_Tree_File_Writer *writer, uint8_t *key, uint32_t new_value_size, uint8_t *new_value);
+void radix_tree_file_writer_insert(struct Radix_Tree_File_Writer *writer, uint8_t *key, size_t key_size, struct Radix_Tree_Value *value);
+struct Radix_Tree_Value *radix_tree_file_writer_value_lookup(struct Radix_Tree_File_Writer *writer, uint8_t *key, size_t key_size);
+void radix_tree_file_writer_modify_value(struct Radix_Tree_File_Writer *writer, uint8_t *key, size_t key_size, uint32_t new_value_size, uint8_t *new_value);
 void radix_tree_file_writer_write(struct Radix_Tree_File_Writer *writer);
 void radix_tree_file_writer_destroy(struct Radix_Tree_File_Writer *writer);
 
