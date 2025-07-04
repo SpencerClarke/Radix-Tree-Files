@@ -8,6 +8,8 @@
 #define UNSET_BIT(bytes,i) ((bytes)[(i) / 8] &= ~((1 << (8-1)) >> ((i) % 8)))
 #define WRITE_BIT(bytes, i, bit) ((bit) ? SET_BIT((bytes), (i)) : UNSET_BIT((bytes), (i)))
 
+#define KEY_BIT_BUFFER_SIZE 2048
+
 struct Radix_Tree_File_Node
 {
 	uint32_t left_offset;
@@ -15,7 +17,7 @@ struct Radix_Tree_File_Node
 	uint32_t value_offset;
 	uint32_t key_bit_count;
 
-	uint8_t key_bits[2048];
+	uint8_t key_bits[KEY_BIT_BUFFER_SIZE];
 };
 
 
@@ -44,6 +46,10 @@ uint8_t *radix_tree_file_lookup(FILE *fp, uint8_t *key, size_t *size)
 	int first = 1;
 
 	struct Radix_Tree_File_Node current_node;
+
+	fseek(fp, current_node_offset, SEEK_SET);
+	current_node = load(fp);
+
 	for(current_key_bit = current_node_bit = 0; current_key_bit < key_bit_count; current_key_bit++)
 	{
 		if(current_node_offset == 0 && !first)
@@ -51,20 +57,22 @@ uint8_t *radix_tree_file_lookup(FILE *fp, uint8_t *key, size_t *size)
 			return NULL;
 		}
 
-		fseek(fp, current_node_offset, SEEK_SET);
-		current_node = load(fp);
-
 		if(current_node_bit >= current_node.key_bit_count)
 		{
 			current_node_bit = 0;
 			if(READ_BIT(key, current_key_bit))
 			{
 				current_node_offset = current_node.right_offset;
+
+				fseek(fp, current_node_offset, SEEK_SET);
+				current_node = load(fp);
 				first = 0;
 			}
 			else
 			{
 				current_node_offset = current_node.left_offset;
+				fseek(fp, current_node_offset, SEEK_SET);
+				current_node = load(fp);
 				first = 0;
 			}
 		}
@@ -84,6 +92,11 @@ uint8_t *radix_tree_file_lookup(FILE *fp, uint8_t *key, size_t *size)
 	}
 
 	if(current_node_bit < current_node.key_bit_count)
+	{
+		return NULL;
+	}
+
+	if(current_node.value_offset == 0)
 	{
 		return NULL;
 	}
