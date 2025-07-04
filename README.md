@@ -31,3 +31,12 @@ The 4-byte integers are all unsigned `uint32_t`'s. Their byte order is currently
 
 # Example usage
 In this respository, I have used these trees to implement `bin/encode` and `bin/search`. `bin/encode` will use a modified form of JMDict, `parsed.txt`, to construct a radix tree file mapping Japanese words to their definitions. `bin/search` will, given the radix tree file and a japanese word as the first and second command line arguments respectively, search the radix tree file for the definitions and print them.
+
+```
+svampis@thinkcentre:~/Radix-Tree-Files$ ./bin/encode
+svampis@thinkcentre:~/Radix-Tree-Files$ ./bin/search jmdict.rdt おはよう
+good morning    おはよう        おはよー
+svampis@thinkcentre:~/Radix-Tree-Files$ ./bin/search jmdict.rdt 米航空宇宙局
+National Aeronautics and Space Administration   NASA    べいこうくううちゅうきょく
+svampis@thinkcentre:~/Radix-Tree-Files$
+```
