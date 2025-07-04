@@ -27,5 +27,7 @@ A data node is of the following format
 
 This is simply the size of the data followed by the data.
 
+The 4-byte integers are all unsigned `uint32_t`'s. Their byte order is currently not explicitly defined in the .rdt format and depends on the machine that generated it.
+
 # Example usage
 In this respository, I have used these trees to implement `bin/encode` and `bin/search`. `bin/encode` will use a modified form of JMDict, `parsed.txt`, to construct a radix tree file mapping Japanese words to their definitions. `bin/search` will, given the radix tree file and a japanese word as the first and second command line arguments respectively, search the radix tree file for the definitions and print them.
