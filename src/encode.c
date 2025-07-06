@@ -55,14 +55,11 @@ int main(void)
 				struct Radix_Tree_Value *value = NULL;
 				while(current_token != NULL)
 				{
-					struct Radix_Tree_Value *lookup_value = radix_tree_file_writer_value_lookup(&writer, (uint8_t *)current_token);
+					struct Radix_Tree_Value *lookup_value = radix_tree_file_writer_value_lookup(&writer, (uint8_t *)current_token, strlen(current_token));
 					if(lookup_value == NULL)
 					{
-						if(value == NULL)
-						{
-							value = radix_tree_file_writer_value_init(&writer, strlen(definition_buffer) + 1, (uint8_t *)definition_buffer);
-						}
-						radix_tree_file_writer_insert(&writer, (uint8_t *)current_token, value);
+						value = radix_tree_file_writer_value_init(&writer, strlen(definition_buffer) + 1, (uint8_t *)definition_buffer);
+						radix_tree_file_writer_insert(&writer, (uint8_t *)current_token, strlen(current_token), value);
 					}
 					else
 					{
@@ -79,7 +76,7 @@ int main(void)
 						new_string[strlen(new_string)-1] = '\n';
 						strcat(new_string, definition_buffer);
 
-						radix_tree_file_writer_modify_value(&writer, (uint8_t *)current_token, new_string_size, (uint8_t *)new_string);
+						radix_tree_file_writer_modify_value(&writer, (uint8_t *)current_token, strlen(current_token), new_string_size, (uint8_t *)new_string);
 						free(new_string);
 					}
 
