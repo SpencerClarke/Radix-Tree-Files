@@ -1,20 +1,17 @@
 .PHONY: clean
 
 CC := gcc
-CFLAGS := -I./include -Wall -Wextra -Wpedantic -g
+CFLAGS := -I./include -Wall -Wextra -Wpedantic -O3
 
 BUILD_DIR := build
 BIN_DIR := bin
 
-all: $(BUILD_DIR) $(BIN_DIR) bin/encode bin/search bin/tokenize
+all: $(BUILD_DIR) $(BIN_DIR) bin/encode bin/search
 
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
-
-bin/tokenize: src/tokenize.c build/radix_tree_file_reader.o
-	$(CC) $(CFLAGS) -o bin/tokenize src/tokenize.c build/radix_tree_file_reader.o
 
 bin/encode: src/encode.c build/radix_tree.o build/radix_tree_file_writer.o
 	$(CC) $(CFLAGS) -o bin/encode src/encode.c build/radix_tree.o build/radix_tree_file_writer.o
