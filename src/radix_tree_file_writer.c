@@ -1,6 +1,3 @@
-#ifndef RADIX_TREE_FILE_H
-#define RADIX_TREE_FILE_H
-
 #include "radix_tree_file_writer.h"
 #include "radix_tree.h"
 #include <stdint.h>
@@ -189,5 +186,3 @@ void radix_tree_file_writer_destroy(struct Radix_Tree_File_Writer *writer)
 
 	fclose(writer->fp);
 }
-
-#endif
