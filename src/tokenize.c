@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 		char *earliest = NULL;
 		while(current_head >= sentence)
 		{
-			char *lookup = (char *)radix_tree_file_lookup(fp, (uint8_t *)current_head, &data_size);
+			char *lookup = (char *)radix_tree_file_lookup(fp, (uint8_t *)current_head, strlen(current_head), &data_size);
 			if(lookup != NULL)
 			{
 				earliest = current_head;

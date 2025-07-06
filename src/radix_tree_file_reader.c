@@ -36,12 +36,12 @@ static struct Radix_Tree_File_Node load(FILE *fp)
 
 	return out;
 }
-uint8_t *radix_tree_file_lookup(FILE *fp, uint8_t *key, size_t *size)
+uint8_t *radix_tree_file_lookup(FILE *fp, uint8_t *key, size_t key_size, size_t *size)
 {
 	size_t current_key_bit;
 	size_t current_node_bit;
 
-	size_t key_bit_count = strlen((char *)key) * 8;
+	size_t key_bit_count = key_size * 8;
 	uint32_t current_node_offset = 0;
 	int first = 1;
 

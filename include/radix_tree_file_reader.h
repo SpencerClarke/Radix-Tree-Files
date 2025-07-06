@@ -11,6 +11,6 @@
  *	key bits
  */
 
-uint8_t *radix_tree_file_lookup(FILE *fp, uint8_t *key, size_t *size);
+uint8_t *radix_tree_file_lookup(FILE *fp, uint8_t *key, size_t key_size, size_t *size);
 
 #endif

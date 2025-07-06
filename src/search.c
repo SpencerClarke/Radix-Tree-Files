@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <string.h>
 
 int main(int argc, char **argv)
 {
@@ -12,7 +13,7 @@ int main(int argc, char **argv)
 	}
 	FILE *fp = fopen(argv[1], "rb");
 	size_t data_size;
-	char *lookup = (char *)radix_tree_file_lookup(fp, (uint8_t *)argv[2], &data_size);
+	char *lookup = (char *)radix_tree_file_lookup(fp, (uint8_t *)argv[2], strlen(argv[2]), &data_size);
 	if(lookup == NULL)
 	{
 		printf("Not found\n");
