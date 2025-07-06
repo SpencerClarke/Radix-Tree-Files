@@ -69,7 +69,7 @@ Destroys all internal data structures used by the radix tree file writer.
 ```
 uint8_t *radix_tree_file_lookup(FILE *fp, uint8_t *key, size_t key_size, size_t *size);
 ```
-Returns a pointer to the value associated with the key consisting of the first `key_size` bytes of `key` if it is present, and NULL otherwise. The size of the value is written to `size` if the key/value pair was present, otherwise `size` is left unmodified. The returned pointer points to dynamically allocated memory and should be freed using `free`.
+Returns a pointer to the value associated with the key consisting of the first `key_size` bytes of `key` if it is present, and NULL otherwise. The size of the value is written to `size` if the key/value pair was present, otherwise `size` is left unmodified. The returned pointer points to dynamically allocated memory and should be freed using `free`. `fp` should be a file pointer to a valid rdt file.
 
 
 
