@@ -3,7 +3,7 @@
 ## Radix Tree File Format (.rdt)
 I describe the format for the radix tree (.rdt) file here.
 
-The radix tree files consists of a series of radix trees node followed by a series of data nodes.
+The radix tree files consists of a series of radix trees nodes followed by a series of data nodes.
 
 A radix tree node is of the following format
 
