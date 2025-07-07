@@ -33,14 +33,7 @@ int main(int argc, char **argv)
 
 		for(size_t i = 0; i < data_size-2; i++)
 		{
-			if(lookup[i] == ',')
-			{
-				putchar('\t');
-			}
-			else
-			{
-				putchar(lookup[i]);
-			}
+			putchar(lookup[i]);
 		}
 		putchar('\n');
 		

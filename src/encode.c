@@ -44,13 +44,6 @@ int main(void)
 				char *current_token;
 				
 				definition_buffer[buffer_index] = '\0';
-				for(size_t i = 0; i < buffer_index; i++)
-				{
-					if(definition_buffer[i] == '\t')
-					{
-						definition_buffer[i] = ',';
-					}
-				}
 				current_token = strtok(word_buffer, "\t");
 				struct Radix_Tree_Value *value = NULL;
 				while(current_token != NULL)
